@@ -47,7 +47,7 @@ export default function Navbar() {
       <div class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
           <Link to="/" class="navbar-brand">
-            Barber<span>Mul</span>
+            Barber<span>Mül</span>
           </Link>
           <button
             type="button"
@@ -66,32 +66,24 @@ export default function Navbar() {
               <Link to="/" class="nav-item nav-link">
                 Inicio
               </Link>
-              <a href="service.html" class="nav-item nav-link">
+              <Link to="/Servicios" class="nav-item nav-link">
                 Servicios
-              </a>
-              <a href="team.html" class="nav-item nav-link">
+              </Link>
+              <Link to={'/Barberos'} class="nav-item nav-link">
                 Barberos
-              </a>
+              </Link>
               
-              <a href="contact.html" class="nav-item nav-link">
-                Contacto
-              </a>
-              <div class="nav-item dropdown">
-                <button
-                  
-                  class="btn btn-dark dropdown-toggle active"
-                  data-toggle="dropdown"
+              <Link to={'/Citas'} class="nav-item nav-link">
+                Reservar Cita
+              </Link>
+              <div class="nav-item ">
+                <Link
+                to={"/Login"}
+                  class="btn btn-secondary"
                 >
                   Inicio de Session
-                </button>
-                <div class="dropdown-menu">
-                  <a href="blog.html" class="dropdown-item">
-                    Blog Page
-                  </a>
-                  <a href="single.html" class="dropdown-item">
-                    Single Page
-                  </a>
-                </div>
+                </Link>
+                
               </div>
             </div>
           </div>

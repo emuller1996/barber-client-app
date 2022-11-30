@@ -1,15 +1,43 @@
 import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import Home from '../pages/Home'
+import { Switch, Route } from 'react-router-dom'
+import Services from '../pages/Services'
+import Barbers from '../pages/Barbers'
+import Footer from '../components/Footer/Footer'
+import Appointment from '../pages/Appointment'
 
 
-export default function TemplateApp (){
+export default function TemplateApp() {
 
 
     return (
         <>
-        <Navbar />
-        <Home />
+            <Navbar />
+            <Switch>
+
+                <Route exact path={'/'} >
+                    <Home />
+                </Route>
+                <Route exact path={'/Servicios'} >
+                    <Services />
+                </Route>
+                <Route exact path={'/Barberos'} >
+                    <Barbers />
+                </Route>
+                <Route exact path={'/Citas'} >
+                    <Appointment />
+                </Route>
+
+
+
+            </Switch>
+            <Footer />
+
+
+
+
+
         </>
     )
 }

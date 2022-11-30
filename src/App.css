@@ -1,7 +1,10 @@
 .App {
   text-align: center;
 }
-
+@import url('https://fonts.cdnfonts.com/css/smush');
+*{
+  font-family: 'Smush', sans-serif;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

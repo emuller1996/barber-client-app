@@ -1,0 +1,21 @@
+.bg-cafe{
+    background-color: #ece3cf;
+}
+.input-appointment{
+    border: 1px solid #D5B981;
+    border-radius: 0;
+    font-weight: 600;
+}
+
+.input-appointment:focus{
+    border: 1px solid #d68f00;
+}
+.btn-validate{
+    background-color: #d68f00;
+    border: #D5B981 solid 1px;
+}
+
+.barber-check{
+    background-color: #d68f00 !important;
+}
+

@@ -26,7 +26,7 @@ export default function Appointment() {
           <div class="row align-items-center">
             <div class="col-lg-5 col-md-4">
               <div class="about-img">
-                <img src={"img/about.jpg"} alt="Image" />
+                <img src="img/about.jpg" alt="photo_about" />
               </div>
             </div>
             <div class="col-lg-7 col-md-8">

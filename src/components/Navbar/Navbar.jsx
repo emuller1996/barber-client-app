@@ -23,16 +23,16 @@ export default function Navbar() {
             <div class="col-md-6">
               <div class="top-bar-right">
                 <div class="social">
-                  <a href="">
+                  <a href="/">
                     <i class="fab fa-twitter"></i>
                   </a>
-                  <a href="">
+                  <a href="/">
                     <i class="fab fa-facebook-f"></i>
                   </a>
-                  <a href="">
+                  <a href="/">
                     <i class="fab fa-linkedin-in"></i>
                   </a>
-                  <a href="">
+                  <a href="/">
                     <i class="fab fa-instagram"></i>
                   </a>
                 </div>

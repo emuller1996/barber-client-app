@@ -1,9 +1,9 @@
 .App {
   text-align: center;
 }
-@import url('https://fonts.cdnfonts.com/css/smush');
+@import url('https://fonts.cdnfonts.com/css/lt-comical');
 *{
-  font-family: 'Smush', sans-serif;
+  font-family: 'LT Comical', sans-serif;
 }
 .App-logo {
   height: 40vmin;

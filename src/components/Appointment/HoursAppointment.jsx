@@ -20,6 +20,8 @@ export default function HoursAppointment({ hoursAvailable,setHours }) {
     );
   return (
     <div className="row mt-2 align-items-center">
+      
+
       {hoursAvailable.map((h) => (
         <div className="col-4 col-md-4 col-xl-3  mb-2">
           <div

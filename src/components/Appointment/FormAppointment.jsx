@@ -28,6 +28,7 @@ export default function FormAppointment() {
     setHoursAvailable(undefined);
     setHours(undefined);
     setServicesSelected([]);
+    console.log(hours)
   }, [barberSelected, dateAppointment]);
 
   const getServices = async (barberSelected) => {
@@ -264,6 +265,9 @@ export default function FormAppointment() {
           </div>
 
           <div className="bg-cafe border mb-4 p-2">
+          
+        <input type="time"  /* hidden */ value={hours}  onChange={ (e)=> {setHours(e.target.value)} } name="timeApp" id="timeApp" />
+      
             <h6>Fecha y Horarios</h6>
             <input
               type="date"

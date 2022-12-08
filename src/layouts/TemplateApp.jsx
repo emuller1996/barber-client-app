@@ -6,6 +6,8 @@ import Services from '../pages/Services'
 import Barbers from '../pages/Barbers'
 import Footer from '../components/Footer/Footer'
 import Appointment from '../pages/Appointment'
+import Login from '../pages/Login'
+import Dashboard from './Dashboard'
 
 
 export default function TemplateApp() {
@@ -27,6 +29,12 @@ export default function TemplateApp() {
                 </Route>
                 <Route exact path={'/Citas'} >
                     <Appointment />
+                </Route>
+                <Route exact path={'/Login'} >
+                    <Login />
+                </Route>
+                <Route  path={'/Dashboard'} >
+                    <Dashboard />
                 </Route>
 
 

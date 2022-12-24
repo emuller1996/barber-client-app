@@ -13,13 +13,8 @@ export default function Services() {
     }, [])
 
     const getServices = async () => {
-        console.log('1', services)
-
         const result = await axios.get('/Services');
-        console.log(result.data);
         setServices(result.data.services)
-        console.log('2', services)
-
     }
 
 
@@ -54,12 +49,12 @@ export default function Services() {
                                 <div class="col-lg-4 col-md-6">
                                     <div class="service-item border border-dark">
                                         <div class="service-img">
-                                            <img src="img/service-1.jpg" alt="Image" />
+                                            <img src="img/service-1.jpg" alt="img" />
                                         </div>
                                         <h3>{s.name}</h3>
                                         <p>
                                             {s.description}</p>
-                                        <a class="btn" href="">Ver más</a>
+                                        <button class="btn btn-dark rounded-0">Ver más</button>
                                     </div>
                                 </div>
                             )) : (

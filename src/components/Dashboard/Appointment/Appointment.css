@@ -14,3 +14,14 @@
     margin-bottom: 1em;
 
 }
+option{
+    background-color:#e6e6e6 !important;
+} 
+
+option:hover{
+    background-color:#e6b162 !important;
+    color:#fff !important
+}
+.hr{
+    border-bottom: 1px solid #e6b162!important;
+}

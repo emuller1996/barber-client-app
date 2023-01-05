@@ -228,6 +228,26 @@ export default function FormAppointment() {
           </div>
 
           <div className="bg-cafe border mb-4 p-2">
+          
+        <input type="time"  /* hidden */ value={hours}  onChange={ (e)=> {setHours(e.target.value)} } name="timeApp" id="timeApp" />
+      
+            <h6>Fecha y Horarios</h6>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              className="form-control input-appointment w-auto"
+              onChange={handleInputDateAppointment}
+            />
+            {hoursAvailable && (
+              <HoursAppointment
+                hoursAvailable={hoursAvailable}
+                setHours={setHours}
+              />
+            )}
+          </div>
+
+          <div className="bg-cafe border mb-4 p-2">
             <h6>Servicios</h6>
             <div className="row">
               {services && barberSelected ? (
@@ -264,25 +284,7 @@ export default function FormAppointment() {
             </div>
           </div>
 
-          <div className="bg-cafe border mb-4 p-2">
           
-        <input type="time"  /* hidden */ value={hours}  onChange={ (e)=> {setHours(e.target.value)} } name="timeApp" id="timeApp" />
-      
-            <h6>Fecha y Horarios</h6>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              className="form-control input-appointment w-auto"
-              onChange={handleInputDateAppointment}
-            />
-            {hoursAvailable && (
-              <HoursAppointment
-                hoursAvailable={hoursAvailable}
-                setHours={setHours}
-              />
-            )}
-          </div>
 
           <div>
             <button

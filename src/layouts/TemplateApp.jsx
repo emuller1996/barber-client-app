@@ -33,12 +33,12 @@ export default function TemplateApp() {
                 <Route exact path={'/Login'} >
                     <Login />
                 </Route>
-                <Route  path={'/Dashboard'} >
+                <Route path={'/Dashboard'} >
                     <Dashboard />
                 </Route>
 
 
-
+                
             </Switch>
             <Footer />
 

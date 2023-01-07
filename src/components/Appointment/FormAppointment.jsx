@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import "./FomAppointment.css";
 import FormRegisterClient from "./FormRegisterClient";
 import HoursAppointment from "./HoursAppointment";
@@ -109,14 +110,33 @@ export default function FormAppointment() {
     try {
       const result = await axios.post("/appointment/", data);
       console.log(result.data);
-      alert(result.data.message)
-      
+      toast.success(`${result.data.message}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
     } catch (error) {
-      
+      toast.erorr(`${error.data.message}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
     }
 
-    
-    
+
+
   };
   return (
     <>
@@ -228,9 +248,9 @@ export default function FormAppointment() {
           </div>
 
           <div className="bg-cafe border mb-4 p-2">
-          
-        <input type="time"  /* hidden */ value={hours}  onChange={ (e)=> {setHours(e.target.value)} } name="timeApp" id="timeApp" />
-      
+
+            <input type="time"  /* hidden */ value={hours} onChange={(e) => { setHours(e.target.value) }} name="timeApp" id="timeApp" />
+
             <h6>Fecha y Horarios</h6>
             <input
               type="date"
@@ -284,7 +304,7 @@ export default function FormAppointment() {
             </div>
           </div>
 
-          
+
 
           <div>
             <button

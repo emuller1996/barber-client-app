@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import Appointment from '../components/Dashboard/Appointment/Appointment';
+import BarberDetail from '../components/Dashboard/Barbers/BarberDetail';
 import Barbers from '../components/Dashboard/Barbers/Barbers';
 import Client from '../components/Dashboard/Client/Clients';
 import DetailService from '../components/Dashboard/Services/DetailService';
@@ -53,11 +54,16 @@ export default function Dashboard() {
                             <DetailService />
                         </Route>
                         <Route exact path={'/Dashboard/Clientes'} >
-                        <Client />
+                            <Client />
                         </Route>
 
+                        <Route exact path={'/Dashboard/Barberos/:idBarber'} >
+                            <BarberDetail />
+                        </Route>
+
+
                     </Switch>
-                   
+
                 </div>
 
 

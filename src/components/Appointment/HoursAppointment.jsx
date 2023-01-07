@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function HoursAppointment({ hoursAvailable,setHours }) {
+export default function HoursAppointment({ hoursAvailable,setHours,dateAppointment, setDateAppointment }) {
 
 
   if (!hoursAvailable) 
@@ -27,7 +27,7 @@ export default function HoursAppointment({ hoursAvailable,setHours }) {
           <div
             className="border border-white bg-dark text-white shadow-sm rounded p-2"
           ><label htmlFor={h.hour} className="w-100 h-100 m-0">
-            <input type="radio" name="hour" value={h.hour} id={h.hour} onClick={(e) => { setHours(e.target.value) }} />
+            <input type="radio" name="hour" value={h.hour} id={h.hour} onClick={(e) => { setHours(`${e.target.value}`) }} />
             <span> {h.hour} </span>
           </label>
             

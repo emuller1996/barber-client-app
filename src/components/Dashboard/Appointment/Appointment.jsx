@@ -78,7 +78,7 @@ export default function Appointment() {
 
                 <div className=" mt-4">
                     <div className="row">
-                        {appointments && appointments.length === 0 && <div className="col-12" > No hay Coordinates </div>}
+                        {appointments && appointments.length === 0 && <div className="col-12" > No hay Citas Agendadas. </div>}
                         {appointments ? (appointments.map(a => (
                             <CardAppointment a={a} changeAppointmentState={changeAppointmentState} />
                         ))

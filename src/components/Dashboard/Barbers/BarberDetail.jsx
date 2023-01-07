@@ -35,7 +35,7 @@ export default function BarberDetail() {
     }
 
     return (
-        <div className="container bg-light">
+        <div className="container bg-light p-3">
             <button onClick={() => { history.goBack() }} type="button" class="close float-right py-1" aria-label="Close">
                 <i class="fas fa-arrow-left"></i>
             </button>

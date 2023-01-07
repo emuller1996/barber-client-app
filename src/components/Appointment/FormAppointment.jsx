@@ -80,7 +80,7 @@ export default function FormAppointment() {
   };
 
   const handleInputDateAppointment = function (e) {
-    setDateAppointment(e.target.value);
+    setDateAppointment( `${e.target.value}`);
   };
   const handleInputServicesAppointment = (e) => {
     console.log("handleInputServicesAppointment");
@@ -100,7 +100,7 @@ export default function FormAppointment() {
     const data = {};
     Object.assign(data, {
       barber_id: barberSelected,
-      date: dateAppointment,
+      date: `${dateAppointment}T${hours}`,
       hour: hours,
       client_id: client._id,
       services: servicesSelected,
@@ -122,7 +122,7 @@ export default function FormAppointment() {
       });
 
     } catch (error) {
-      toast.erorr(`${error.data.message}`, {
+      toast.error(`${error.response.data.message}`, {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -263,6 +263,8 @@ export default function FormAppointment() {
               <HoursAppointment
                 hoursAvailable={hoursAvailable}
                 setHours={setHours}
+                dateAppointment={dateAppointment}
+                setDateAppointment={setDateAppointment}
               />
             )}
           </div>

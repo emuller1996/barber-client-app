@@ -8,6 +8,7 @@ import Footer from '../components/Footer/Footer'
 import Appointment from '../pages/Appointment'
 import Login from '../pages/Login'
 import Dashboard from './Dashboard'
+import AppointmentConfirmation from '../components/Appointment/AppointmentConfirmation'
 
 
 export default function TemplateApp() {
@@ -29,6 +30,9 @@ export default function TemplateApp() {
                 </Route>
                 <Route exact path={'/Citas'} >
                     <Appointment />
+                </Route>
+                <Route exact path={'/Citas/Confirmacion/:idCitas'} >
+                    <AppointmentConfirmation />
                 </Route>
                 <Route exact path={'/Login'} >
                     <Login />

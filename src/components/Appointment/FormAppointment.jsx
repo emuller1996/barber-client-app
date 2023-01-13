@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./FomAppointment.css";
 import FormRegisterClient from "./FormRegisterClient";
@@ -18,6 +19,8 @@ export default function FormAppointment() {
   const [hours, setHours] = useState();
   const [hoursAvailable, setHoursAvailable] = useState(undefined);
   const [dateAppointment, setDateAppointment] = useState();
+
+  const history = useHistory();
 
   useEffect(() => {
     getAllBarbers();
@@ -120,6 +123,11 @@ export default function FormAppointment() {
         progress: undefined,
         theme: "light",
       });
+
+
+      history.push(`Citas/Confirmacion/${result.data.appointment._id}`)
+
+
 
     } catch (error) {
       toast.error(`${error.response.data.message}`, {

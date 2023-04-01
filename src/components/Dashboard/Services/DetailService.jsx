@@ -4,19 +4,27 @@ import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import FormService from "./FormServices";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 export default function DetailService() {
   const params = useParams();
   const history = useHistory();
   const [service, setService] = useState({});
+  const [token, setToken] = useLocalStorage("token", undefined);
 
   useEffect(() => {
     getService();
+    console.log(token);
   }, []);
 
   const getService = async () => {
     try {
-      const result = await axios.get(`/services/${params.idService}`);
+      const result = await axios.get(`/services/${params.idService}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      });
       console.log(result.data.service);
       setService(result.data.service);
     } catch (error) {
@@ -31,18 +39,26 @@ export default function DetailService() {
   const handleSumbit = async (e) => {
     e.preventDefault();
     service.id = service._id;
-    
 
     try {
-      const result = await axios.put("/services", {
-        serviceUpdated: service,
-        id: service._id,
-      });
+      const result = await axios.put(
+        "/services",
+        {
+          serviceUpdated: service,
+          id: service._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        }
+      );
       console.log(result.data);
-      toast.success('Servicio Actualizado')
+      toast.success("Servicio Actualizado");
     } catch (error) {
-      alert(error.response.data.error);
-      console.log(error.response.data.error);
+      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 

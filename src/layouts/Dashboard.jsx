@@ -7,12 +7,15 @@ import Barbers from "../components/Dashboard/Barbers/Barbers";
 import Client from "../components/Dashboard/Client/Clients";
 import DetailService from "../components/Dashboard/Services/DetailService";
 import Services from "../components/Dashboard/Services/Services";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export default function Dashboard() {
   const history = useHistory();
+  const [token, setToken] = useLocalStorage("token", undefined);
+
 
   useEffect(() => {
-    //  validate();
+    validate();
     return () => {
       console.log("DESMONTE");
     };
@@ -20,7 +23,12 @@ export default function Dashboard() {
 
   const validate = async () => {
     try {
-      const result = await axios.post("/auth/validate");
+      const result = await axios.post("/auth/validate",undefined,{
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      });
       console.log(result);
     } catch (error) {
       console.log(error.message);

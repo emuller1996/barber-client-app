@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React,{useState} from 'react';
 import { useHistory } from 'react-router-dom';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 
 export default function FormLogin() {
@@ -8,6 +9,7 @@ export default function FormLogin() {
 
     const [input, setInput] = useState('');
     const history = useHistory();
+    const [token, setToken] = useLocalStorage("token", undefined);
 
 
     const handleInput = function (e) {
@@ -26,7 +28,10 @@ export default function FormLogin() {
                 }
             });
         console.log(result.data)
+        setToken(result.data.token)
         history.push('/Dashboard/')
+        console.log(token)
+
 
         } catch (error) {
         console.log(error)

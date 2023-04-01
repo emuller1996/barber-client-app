@@ -80,7 +80,7 @@ export default function Services() {
                       <div className="col-12">
                         <div class="card-body">
                           <h4 className="p-0"> {service.name}</h4>
-                          <p className="font-weight-bold">{service.price}</p>
+                          <p className="font-weight-bold">${service.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
                         </div>
                       </div>
                     </div>

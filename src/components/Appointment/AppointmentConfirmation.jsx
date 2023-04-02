@@ -57,10 +57,10 @@ export default function AppointmentConfirmation() {
 
                                 <div class="card mb-3 border-0" >
                                     <div class="card-body">
-                                        <h5 class="card-title">  Hola {appointment.client_id.name} tu cita ha sido agendata para la fecha {appointment.date.substring(0, 7)} en la hora {appointment.hour} </h5>
-                                        
+                                        <h5 class="card-title">  Hola {appointment.client_id.name} tu cita ha sido agendata para la fecha {appointment.date.substring(0, 10)} en la hora {appointment.hour} </h5>
+
                                         <h6 class="card-subtitle mb-2 text-muted"> Muchas gracias por reservar con nosotros.  </h6>
-                                      
+
 
 
                                     </div>
@@ -117,8 +117,55 @@ export default function AppointmentConfirmation() {
 
                     </div>
 
+                    <div className="col-md-8">
+                        <h5>Servicios </h5>
+                        {appointment ? appointment.services.map(service => (
+                            <div className="card mt-2 rounded-0">
+                                <div className="card-body py-1">
+
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <div className="">{service.name}</div>
+                                        </div>
+                                        <div className="col-6 text-right">
+                                            <div className="">${service.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+
+                            :
+                            (<div class="spinner-border text-secondary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>)
+
+                        }
+
+                        <div className="row">
+                            <div className="col-6">
+                                <div className=""></div>
+                            </div>
+                            <div className="col-6 text-right">
+                                <div className="p-2">
+                                    <span className="text-dark p-2"> ${appointment && appointment.services.reduce(
+                                        (accumulator, currentValue) => accumulator + currentValue.price
+                                        , 0
+                                    ).toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div className="col-md-4 ">
+                        <p className='mt-4'>Nota : Por favor no faltar a la citas agendada, si no puede asistir por fuerza mayor cancele su cita con tiempo.</p>
+                    </div>
+
                     <div className="col-12">
-                    <div class="float-left"> <button type="button" class="btn btn-outline-danger"onClick={() => { history.goBack() }} > <i class="fas fa-arrow-left fa-2x mr-3"></i> <span className="text-center h5">Volver</span> </button></div>
+                        <div class="text-center"> <button type="button" class="btn btn-outline-danger" onClick={() => { history.goBack() }} > <i class="fas fa-arrow-left mr-3"></i> <span className="text-center h5">Volver</span> </button></div>
                     </div>
                 </div>
 

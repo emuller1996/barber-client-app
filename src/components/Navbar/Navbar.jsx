@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export default function Navbar() {
+  const [token, setToken] = useLocalStorage("token", undefined);
+
   return (
     <>
       {/* Top Bar Start */}
@@ -12,7 +15,7 @@ export default function Navbar() {
               <div class="top-bar-left">
                 <div class="text">
                   <h2>8:00AM - 8:00PM</h2>
-                  <p>Abierto  de Lunes - Sabados</p>
+                  <p>Abierto de Lunes - Sabados</p>
                 </div>
                 <div class="text">
                   <h2>+57 31554895</h2>
@@ -69,21 +72,30 @@ export default function Navbar() {
               <Link to="/Servicios" class="nav-item nav-link">
                 Servicios
               </Link>
-              <Link to={'/Barberos'} class="nav-item nav-link">
+              <Link to={"/Barberos"} class="nav-item nav-link">
                 Barberos
               </Link>
-              
-              <Link to={'/Citas'} class="nav-item nav-link">
+
+              <Link to={"/Citas"} class="nav-item nav-link">
                 Reservar Cita
               </Link>
               <div class="nav-item ">
-                <Link
-                to={"/Login"}
-                  class="btn btn-secondary"
-                >
-                  Inicio de Session
-                </Link>
-                
+                {token ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setToken(undefined);
+                    }}
+                    class="btn btn-danger rounded-0"
+                  >
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    Cerrar Seccion
+                  </button>
+                ) : (
+                  <Link to={"/Login"} class="btn btn-secondary">
+                    Inicio de Session
+                  </Link>
+                )}
               </div>
             </div>
           </div>

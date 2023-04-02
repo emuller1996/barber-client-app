@@ -53,7 +53,7 @@ export default function CardAppointment({ a, changeAppointmentState }) {
                                 <span className="text-success h5">  $ {a.services.reduce(
                                     (accumulator, currentValue) => accumulator + currentValue.price
                                     , 0
-                                )}</span>
+                                ).toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
                             </div>
                         </div>
 

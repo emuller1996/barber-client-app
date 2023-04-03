@@ -48,7 +48,16 @@ export default function Appointment() {
   const changeAppointmentState = async (id, state) => {
     console.log(id, state);
     try {
-      const result = await axios.patch(`appointment/${id}/${state}`);
+      const result = await axios.patch(
+        `appointment/${id}/${state}`,
+        undefined,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        }
+      );
       console.log(result);
 
       getAppointments(barberSearch, dateSearch);

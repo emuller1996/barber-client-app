@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [token, setToken] = useLocalStorage("token", undefined);
+  const isLogin = useSelector( state => state.user.isLogin)
+
+  useEffect(() => {
+    
+  }, [setToken, isLogin,token]);
 
   return (
     <>
@@ -80,11 +86,12 @@ export default function Navbar() {
                 Reservar Cita
               </Link>
               <div class="nav-item ">
-                {token ? (
+                {isLogin ? (
                   <button
                     type="button"
                     onClick={() => {
                       setToken(undefined);
+                      /* setIsLogin(false) */
                     }}
                     class="btn btn-danger rounded-0"
                   >

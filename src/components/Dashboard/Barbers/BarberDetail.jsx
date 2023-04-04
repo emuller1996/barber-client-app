@@ -120,9 +120,10 @@ export default function BarberDetail() {
               <input
                 type="text"
                 class="form-control input-appointment"
-                name="name"
+                name="image"
                 value={barber ? barber.image : ""}
                 id="nameBarber"
+                onChange={handleInputBarber}
               />
             </div>
           </div>

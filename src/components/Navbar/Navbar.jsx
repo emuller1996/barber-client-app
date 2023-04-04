@@ -1,15 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { getToken, loguot } from "../../features/User/userSlice";
 
 export default function Navbar() {
   const [token, setToken] = useLocalStorage("token", undefined);
-  const isLogin = useSelector( state => state.user.isLogin)
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const dispacht = useDispatch();
 
   useEffect(() => {
-    
-  }, [setToken, isLogin,token]);
+    validate();
+  }, [setToken, isLogin, token]);
+
+  const validate = async () => {
+    try {
+      const result = await axios.post("/auth/validate", undefined, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      });
+      console.log(result.data);
+      dispacht(getToken({ token: result.data.token }));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
@@ -87,17 +105,38 @@ export default function Navbar() {
               </Link>
               <div class="nav-item ">
                 {isLogin ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setToken(undefined);
-                      /* setIsLogin(false) */
-                    }}
-                    class="btn btn-danger rounded-0"
-                  >
-                    <i class="fas fa-sign-out-alt mr-2"></i>
-                    Cerrar Seccion
-                  </button>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-secondary dropdown-toggle rounded-0"
+                      type="button"
+                      data-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Mi Perfil
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">
+                        Mi Informacion
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        Mi Citas
+                      </a>
+                      <Link  to={'Dashboard'} class="dropdown-item" >
+                        Dasboard
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setToken(undefined);
+                          dispacht(loguot());
+                        }}
+                        class="btn btn-danger rounded-0"
+                      >
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        Cerrar Seccion
+                      </button>
+                    </div>
+                  </div>
                 ) : (
                   <Link to={"/Login"} class="btn btn-secondary">
                     Inicio de Session

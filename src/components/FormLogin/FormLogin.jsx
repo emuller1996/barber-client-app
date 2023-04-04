@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-
+import { useDispatch } from "react-redux";
+import { login } from "../../features/User/userSlice";
 export default function FormLogin() {
   const [input, setInput] = useState("");
   const [error, setError] = useState(undefined);
-
+  const dispacht = useDispatch()
   const history = useHistory();
   const [token, setToken] = useLocalStorage("token", undefined);
 
@@ -29,6 +30,7 @@ export default function FormLogin() {
       setToken(result.data.token);
       history.push("/Dashboard/");
       console.log(token);
+      dispacht(login(token))
     } catch (error) {
       console.log(error);
 

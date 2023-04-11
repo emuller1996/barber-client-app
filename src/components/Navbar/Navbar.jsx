@@ -121,7 +121,7 @@ export default function Navbar() {
                       <a class="dropdown-item" href="#">
                         Mi Citas
                       </a>
-                      <Link  to={'Dashboard'} class="dropdown-item" >
+                      <Link  to={'/Dashboard'} class="dropdown-item" >
                         Dasboard
                       </Link>
                       <button

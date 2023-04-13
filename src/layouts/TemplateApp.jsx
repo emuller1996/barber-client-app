@@ -9,6 +9,7 @@ import Appointment from '../pages/Appointment'
 import Login from '../pages/Login'
 import Dashboard from './Dashboard'
 import AppointmentConfirmation from '../components/Appointment/AppointmentConfirmation'
+import MyProfile from '../pages/MyProfile'
 
 
 export default function TemplateApp() {
@@ -39,6 +40,9 @@ export default function TemplateApp() {
                 </Route>
                 <Route path={'/Dashboard'} >
                     <Dashboard />
+                </Route>
+                <Route path={'/MiPerfil/:phoneNumber'} >
+                    <MyProfile />
                 </Route>
 
 

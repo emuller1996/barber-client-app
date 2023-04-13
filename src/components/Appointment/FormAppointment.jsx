@@ -5,9 +5,10 @@ import { toast } from "react-toastify";
 import "./FomAppointment.css";
 import FormRegisterClient from "./FormRegisterClient";
 import HoursAppointment from "./HoursAppointment";
+import formartNumber from "../../hooks/formartNumber";
 
 export default function FormAppointment() {
-  const [client, setClient] = useState({});
+  const [client, setClient] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [phoneNumberError, setPhoneNumberError] = useState(
     "Telefono es requerido."
@@ -32,7 +33,7 @@ export default function FormAppointment() {
     setHoursAvailable(undefined);
     setHours(undefined);
     setServicesSelected([]);
-    console.log(hours)
+    console.log(hours);
   }, [barberSelected, dateAppointment]);
 
   const getServices = async (barberSelected) => {
@@ -83,7 +84,7 @@ export default function FormAppointment() {
   };
 
   const handleInputDateAppointment = function (e) {
-    setDateAppointment( `${e.target.value}`);
+    setDateAppointment(`${e.target.value}`);
   };
   const handleInputServicesAppointment = (e) => {
     console.log("handleInputServicesAppointment");
@@ -124,11 +125,7 @@ export default function FormAppointment() {
         theme: "light",
       });
 
-
-      history.push(`Citas/Confirmacion/${result.data.appointment._id}`)
-
-
-
+      history.push(`Citas/Confirmacion/${result.data.appointment._id}`);
     } catch (error) {
       toast.error(`${error.response.data.message}`, {
         position: "top-center",
@@ -140,11 +137,7 @@ export default function FormAppointment() {
         progress: undefined,
         theme: "light",
       });
-
     }
-
-
-
   };
   return (
     <>
@@ -189,8 +182,11 @@ export default function FormAppointment() {
                   <div className="col-5 text-left">
                     <span> Edad : {client.age}</span>
                   </div>
-                  <div className="col-9 text-left">
+                  <div className="col-8 text-left">
                     <span> Correo : {client.email}</span>
+                  </div>
+                  <div className="col-4 text-left">
+                    <i class="text-success fas fa-thumbs-up fa-2x"></i>
                   </div>
                 </>
               ) : (
@@ -213,10 +209,10 @@ export default function FormAppointment() {
           <div className="bg-cafe border mb-4 p-2">
             <h5>Barberos</h5>
             <p>Seleccione el Barbero</p>
-            <div className="row m-1 ">
+            <div className="row m-2 ">
               {barbersAll ? (
                 barbersAll.map((b) => (
-                  <div key={b._id} className="col-4 border border-secondary ">
+                  <div key={b._id} className={ barberSelected===b._id ?"col-4 radio-barber" : "col-4 radio-barber-selected "}>
                     <label htmlFor={b._id} className="w-100 m-0 p-0 ">
                       <input
                         type="radio"
@@ -256,48 +252,63 @@ export default function FormAppointment() {
           </div>
 
           <div className="bg-cafe border mb-4 p-2">
+            <input
+              type="time"
+              hidden
+              value={hours}
+              onChange={(e) => {
+                setHours(e.target.value);
+              }}
+              name="timeApp"
+              id="timeApp"
+            />
 
-            <input type="time"  /* hidden */ value={hours} onChange={(e) => { setHours(e.target.value) }} name="timeApp" id="timeApp" />
-
-            <h6>Fecha y Horarios</h6>
+            <h6>Selecione la Fecha. </h6>
             <input
               type="date"
               name="date"
               id="date"
-              className="form-control input-appointment w-auto"
+              className="form-control input-appointment  mx-auto w-75 mb-3"
               onChange={handleInputDateAppointment}
             />
+
             {hoursAvailable && (
-              <HoursAppointment
-                hoursAvailable={hoursAvailable}
-                setHours={setHours}
-                dateAppointment={dateAppointment}
-                setDateAppointment={setDateAppointment}
-              />
+              <>
+                <h6 className="mb-3"> Selecione la Hora </h6>
+
+                <HoursAppointment
+                  hoursAvailable={hoursAvailable}
+                  setHours={setHours}
+                  dateAppointment={dateAppointment}
+                  setDateAppointment={setDateAppointment}
+                  hours={hours}
+                />
+              </>
             )}
           </div>
 
           <div className="bg-cafe border mb-4 p-2">
             <h6>Servicios</h6>
-            <div className="row">
+            <div className="row mx-1">
               {services && barberSelected ? (
                 services.map((service) => (
-                  <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="border border-dark">
+                  <div key={service._id} class="col-lg-3 col-md-4 col-sm-6">
+                    <div class={servicesSelected.includes(service._id)  ? "card-service-selected mb-3" : "card-service mb-3"}>
                       <label htmlFor={service._id} className="w-100 m-0 p-0 ">
                         <input
                           type="checkbox"
                           name="services"
                           id={service._id}
                           value={service._id}
-                          className="barber-check"
+                          className="checkbox"
                           onClick={handleInputServicesAppointment}
+                            
                         />
 
                         <div className="row">
                           <div className="col">
                             <small>{service.name}</small>
-                            <p> $ {service.price}</p>
+                            <p>{formartNumber(service.price)}</p>
                           </div>
                         </div>
                       </label>
@@ -314,12 +325,12 @@ export default function FormAppointment() {
             </div>
           </div>
 
-
-
           <div>
             <button
               class="btn btn-info"
-              disabled={!barberSelected || !phoneNumber || !hours ? true : false}
+              disabled={
+                !barberSelected || !phoneNumber || !hours ? true : false
+              }
               type="submit"
               id="sendMessageButton"
             >

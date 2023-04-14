@@ -73,7 +73,8 @@ export default function Navbar() {
       {/* Nav Bar Start */}
       <div class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
-          <Link to="/" class="navbar-brand">
+          <img src="/img/logo.png" width="50" alt="" />
+          <Link to="/" class="navbar-brand ml-2">
             Barber<span>Mül</span>
           </Link>
           <button

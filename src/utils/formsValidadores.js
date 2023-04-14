@@ -3,6 +3,8 @@ function validateLoginAdmin(input) {
     let errors = {};
     if (!input.email) {
       errors.email = "Correo es requerido.";
+    }else if (!/\S+@\S+\.\S+/.test(input.email)){
+      errors.email = "Debe ingresar un correo";
     }
 
     if (!input.password) {

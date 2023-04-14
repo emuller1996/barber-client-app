@@ -289,7 +289,11 @@ export default function FormAppointment() {
 
           <div className="bg-cafe border mb-4 p-2">
             <h6>Servicios</h6>
+            {
+                servicesSelected.length===0 && ( <p className="text-danger">Debe selecionar al menos un servicio</p> )
+              }
             <div className="row mx-1">
+              
               {services && barberSelected ? (
                 services.map((service) => (
                   <div key={service._id} class="col-lg-3 col-md-4 col-sm-6">
@@ -329,7 +333,7 @@ export default function FormAppointment() {
             <button
               class="btn btn-info"
               disabled={
-                !barberSelected || !phoneNumber || !hours ? true : false
+                !barberSelected || !phoneNumber || !hours || servicesSelected.length === 0 ? true : false
               }
               type="submit"
               id="sendMessageButton"

@@ -10,17 +10,23 @@ import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import FormRegisterClient from "../Appointment/FormRegisterClient";
+import { validateLoginAdmin } from "../../utils/formsValidadores";
 
 export default function FormLogin() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState({email:"", password:""});
   const [error, setError] = useState(undefined);
+  const [errorInputAdmin, setErrorInputAdmin] = useState({})
+  const [changeInputAdmin, setChangeInputAdmin] = useState(!false)
+
   const dispacht = useDispatch();
   const history = useHistory();
   const [token, setToken] = useLocalStorage("token", undefined);
   const [phoneNumber, setPhoneNumber] = useState(undefined)
 
   const handleInput = function (e) {
+     setChangeInputAdmin(!true)
     setInput({ ...input, [e.target.name]: e.target.value });
+    setErrorInputAdmin(validateLoginAdmin({ ...input, [e.target.name]: e.target.value }) )
   };
 
   const handleSumbit = async (e) => {
@@ -100,10 +106,10 @@ export default function FormLogin() {
                     Ingresar
                   </button>
                   <div className="container mt-2">
-                    <a className=" btn btn-registrame text-dark"
+                    <span className=" btn btn-registrame text-dark"
                     type="button"
                     data-toggle="modal"
-                    data-target="#ModalRegister">Registrame</a>
+                    data-target="#ModalRegister">Registrame</span>
                   </div>
                 </form>
               </Tab.Pane>
@@ -121,25 +127,39 @@ export default function FormLogin() {
                         <div class="form-group">
                           <input
                             type="email"
-                            class="form-control input-appointment"
+                            class={
+                              !errorInputAdmin.email
+                                ? "form-control input-appointment"
+                                : "form-control input-error"
+                            }
                             onChange={handleInput}
                             value={input.email}
                             id="email"
                             name="email"
                             placeholder="Correo"
                           />
+                          <small id="emailHelp" class="form-text text-danger">
+                            {errorInputAdmin.email ? errorInputAdmin.email : false}{" "}
+                          </small>
                         </div>
 
                         <div class="form-group">
                           <input
                             type="password"
-                            class="form-control input-appointment"
+                            class={
+                              !errorInputAdmin.password
+                                ? "form-control input-appointment"
+                                : "form-control input-error"
+                            }
                             onChange={handleInput}
                             value={input.password}
                             id="password"
                             name="password"
                             placeholder="Contraseña"
                           />
+                          <small id="emailHelp" class="form-text text-danger">
+                            {errorInputAdmin.password ? errorInputAdmin.password : false}{" "}
+                          </small>
                         </div>
 
                         {error && (
@@ -151,7 +171,8 @@ export default function FormLogin() {
                           </div>
                         )}
 
-                        <button type="submit" class="btn btn-dark rounded-0">
+                        <button type="submit" class="btn btn-dark rounded-0"
+                        disabled={Object.values(errorInputAdmin).length !== 0 || changeInputAdmin}>
                           Ingresar
                         </button>
                       </div>

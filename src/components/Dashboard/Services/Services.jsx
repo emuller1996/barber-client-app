@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ModalService from "./ModalService";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import FormService from "./FormServices";
 
 export default function Services() {
   const [services, setServices] = useState();
   const [input, setInput] = useState({});
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
     getAllServices();
@@ -47,6 +50,7 @@ export default function Services() {
             className="w-100 btn btn-info rounded-0"
             data-toggle="modal"
             data-target="#ModalServiceDash"
+            onClick={() => setShow(true)}
           >
             Crear Servicio
           </button>
@@ -80,7 +84,12 @@ export default function Services() {
                       <div className="col-12">
                         <div class="card-body">
                           <h4 className="p-0"> {service.name}</h4>
-                          <p className="font-weight-bold">${service.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+                          <p className="font-weight-bold">
+                            $
+                            {service.price.toLocaleString(undefined, {
+                              maximumFractionDigits: 2,
+                            })}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -104,11 +113,23 @@ export default function Services() {
           </div>
         </div>
       </div>
-      <ModalService
+      {/* <ModalService
         handleSumbit={handleSumbit}
         handleInput={handleInput}
         input={input}
-      />
+      /> */}
+      <Offcanvas placement="end" show={show} onHide={() => setShow(false)}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Crear Nuevo Servicio</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <FormService
+            handleSumbit={handleSumbit}
+            handleInput={handleInput}
+            input={input}
+          />
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 }

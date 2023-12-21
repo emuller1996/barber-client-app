@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import 'bootstrap/dist/css/bootstrap.min.css';
 axios.defaults.baseURL = process.env.REACT_APP_API;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
